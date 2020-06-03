@@ -1,0 +1,31 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+                    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory app:title="@string/models_header">
+
+
+        <ListPreference
+            app:defaultValue="IGRF"
+            app:entries="@array/model_entries"
+            app:entryValues="@array/model_values"
+            app:key="model"
+            app:title="@string/model_title"
+            app:useSimpleSummaryProvider="true"
+
+            />
+
+        <ListPreference
+            app:defaultValue="Ellipse"
+            app:entries="@array/shape_entries"
+            app:entryValues="@array/shape_values"
+            app:key="shape"
+            app:title="@string/shape_title"
+            app:useSimpleSummaryProvider="true"
+
+            />
+
+    </PreferenceCategory>
+
+
+
+</PreferenceScreen>

@@ -1,0 +1,37 @@
+<resources>
+    <!-- Main screen -->
+    <string name="app_name">MagFielder</string>
+    <string name="latitude">Latitude:</string>
+    <string name="hint">Enter like 60.155</string>
+    <string name="longitude">Longitude:</string>
+    <string name="altitude">Altitude(m):</string>
+    <string name="date">Date:</string>
+    <string name="usegps">Use GPS</string>
+    <string name="calculate">Calculate</string>
+    <string name="clear">Clear</string>
+    <string name="results">Results</string>
+    <string name="Bhor">Bhor(nT):</string>
+    <string name="Btotal">Btotal(nT):</string>
+    <string name="DIP">Decl(deg):</string>
+    <string name="INCL">Incl(deg):</string>
+    <string name="serialError">Serialization error</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+
+    <!-- Errors -->
+    <string name="bad_signal">Bad GPS signal</string>
+    <string name="gps_seems_turnoff">Your GPS seems to be disabled, do you want to enable it?</string>
+    <!-- Menu Titles -->
+    <string name="menuGPS">GPS</string>
+    <string name="menuGPSON">GPS(On)</string>
+    <string name="menuSettings">Settings</string>
+
+    <!-- Preference Titles -->
+    <string name="models_header">Model settings</string>
+
+    <!-- Messages Preferences -->
+    <string name="model_title">Magnetic model:</string>
+    <string name="shape_title">Shape of Earth:</string>
+
+</resources>

@@ -1,0 +1,38 @@
+<resources>
+    <!-- Main screen -->
+    <string name="app_name">MagFielder</string>
+    <string name="latitude">Широта:</string>
+    <string name="hint">Введите значение, например, 60.155</string>
+    <string name="longitude">Долгота:</string>
+    <string name="altitude">Высота(м):</string>
+    <string name="date">Дата:</string>
+    <string name="usegps">Использовать GPS</string>
+    <string name="calculate">Рассчитать</string>
+    <string name="clear">Очистить</string>
+    <string name="results">Результаты</string>
+    <string name="Bhor">Bhor(нТл):</string>
+    <string name="Btotal">Btotal(нТл):</string>
+    <string name="DIP">Decl(град):</string>
+    <string name="INCL">Incl(град):</string>
+    <string name="serialError">Ошибка сериализации</string>
+    <string name="title_activity_settings">Настройки</string>
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
+
+    <!-- Errors -->
+    <string name="bad_signal">Плохой сигнал GPS</string>
+    <string name="gps_seems_turnoff">Похоже, GPS отключен. Желаете включить?</string>
+
+    <!-- Menu Titles -->
+    <string name="menuGPS">GPS</string>
+    <string name="menuGPSON">GPS(On)</string>
+    <string name="menuSettings">Настройки</string>
+
+    <!-- Preference Titles -->
+    <string name="models_header">Настройки модели</string>
+
+    <!-- Messages Preferences -->
+    <string name="model_title">Магнитная модель:</string>
+    <string name="shape_title">Форма земли:</string>
+
+</resources>

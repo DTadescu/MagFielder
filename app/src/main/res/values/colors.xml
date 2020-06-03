@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#101088</color>
+    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorAccent">#03DAC5</color>
+    <color name="backmain">#140030</color>
+    <color name="backsettings">#151035</color>
+    <color name="gpsoff">#de1010</color>
+    <color name="gpson">#de1010</color>
+    <color name="label">#18cccc</color>
+    <color name="white">#ffffff</color>
+    <color name="ivory">#aabbbb</color>
+</resources>
