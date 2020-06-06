@@ -1,4 +1,4 @@
 package shdv.example.magfielder.data
 
-class IGRFDispather: ModelDispatcher() {
+class IGRFDispather(_shape: Int): ModelDispatcher(_shape) {
 }

@@ -24,6 +24,16 @@
 
             />
 
+        <ListPreference
+            app:defaultValue="dd/MM/yyyy"
+            app:entries="@array/dateformat_entries"
+            app:entryValues="@array/dateformat_values"
+            app:key="dateformat"
+            app:title="@string/dateformat_title"
+            app:useSimpleSummaryProvider="true"
+
+            />
+
     </PreferenceCategory>
 
 

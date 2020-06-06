@@ -22,6 +22,8 @@
     <!-- Errors -->
     <string name="bad_signal">Bad GPS signal</string>
     <string name="gps_seems_turnoff">Your GPS seems to be disabled, do you want to enable it?</string>
+    <string name="field_is_empty">Fill all input fields.</string>
+    <string name="format_exception">Invalid input data.</string>
     <!-- Menu Titles -->
     <string name="menuGPS">GPS</string>
     <string name="menuGPSON">GPS(On)</string>
@@ -33,5 +35,9 @@
     <!-- Messages Preferences -->
     <string name="model_title">Magnetic model:</string>
     <string name="shape_title">Shape of Earth:</string>
+    <string name="dateformat_title">Date format:</string>
+
+    <string name="send_to">Share results via:</string>
+    <string name="copy_message">Copied to clipboard.</string>
 
 </resources>

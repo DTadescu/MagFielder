@@ -8,7 +8,16 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 enum class DateFormat(val value: String) {
-    DMY("dd/MM/yyyy"), MDY("MM/dd/yyyy"), YMD("yyyy/MM/dd")
+    DMY("dd/MM/yyyy"), MDY("MM/dd/yyyy"), YMD("yyyy/MM/dd");
+    companion object{
+        fun getFormat(x: String): DateFormat {
+            for (f in values()){
+                if(x == f.value) return f
+            }
+            return DMY
+        }
+    }
+
 }
 
 class UserDate(_day: Int, _month: Int, _year:Int){

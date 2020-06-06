@@ -1,6 +1,7 @@
 package shdv.example.magfielder.data
 
 import android.content.SharedPreferences
+import android.util.Log
 import shdv.example.magfielder.Utils.DateFormat
 import shdv.example.magfielder.Utils.DateFormatter
 
@@ -8,40 +9,56 @@ class ModelMediator(sPref: SharedPreferences) {
     val model:ModelDispatcher
     private val modelType = sPref.getString("model", "0")?.toInt()?:0
     private val shape = sPref.getString("shape", "0")?.toInt()?:0
-    private val dateFormat = sPref.getString("dformat", "dd/MM/yyyy")
+    private val dateFormat = sPref.getString("dateformat","dd/MM/yyyy")?:"yyyy/MM/dd"
 
     private var resulListeners: ArrayList<(FieldResult) -> Unit> = arrayListOf(fun(_:FieldResult){})
     private var errorListeners: ArrayList<(String)->Unit> = arrayListOf(fun(_:String){})
 
     init {
 
-        model = when(modelType){
-            0 -> IGRFDispather()
-            1 -> WMMDispatcher()
-            else -> IGRFDispather()
+         when(modelType){
+            0 -> {
+                model = IGRFDispather(shape)
+                Log.d("NEWMODEL","IGRF")
+            }
+            1 -> {
+               model = WMMDispatcher(shape)
+                Log.d("NEWMODEL","WMM")
+            }
+            else -> {
+                model = IGRFDispather(shape)
+                Log.d("NEWMODEL","Strange")
+            }
         }
     }
 
-    fun apply(lat: Double, lon: Double, alt: Double, _date: String){
+    fun doWork(lat: Double, lon: Double, alt: Double, _date: String){
         try{
+            Log.d("CALC", "Start calc")
            if (!model.validateIn(lat, lon, alt)) {
                errorHappened("Invalid data.")
                return
            }
-            val date = model.dateFormat(_date, dateFormat as DateFormat)
+            val date = model.dateFormat(_date, DateFormat.getFormat(dateFormat))
+            Log.d("CALC", "Date is done ${date}")
             val coeffs = model.getCoeffsByDate(date)
+            Log.d("CALC", "Coeffs is done")
             if(coeffs == null) {
                 errorHappened("An error occurred.")
                 return
             }
-            val  gParams = model.prepare(lat, alt, shape)
+            val  gParams = model.prepare(lat, alt)
+            Log.d("CALC", "Geoparams is done ${gParams.radius} ${gParams.theta} ${gParams.sd} ${gParams.cd}")
             val result = model.getResult(gParams, lon, coeffs)
+            Log.d("CALC", "done result")
             resultUpdated(result)
         }
         catch (e:ModelException){
+            e.printStackTrace()
             errorHappened(e.toString())
         }
         catch (e: Exception){
+            e.printStackTrace()
             errorHappened("An error occurred.")
         }
     }
@@ -51,7 +68,10 @@ class ModelMediator(sPref: SharedPreferences) {
     }
 
     fun removeResultListener(del: (FieldResult) -> Unit){
-        resulListeners.remove(del)
+        try {
+            resulListeners.remove(del)
+        }
+        catch(e: Exception) {e.printStackTrace()}
     }
 
     fun setErrorListener(del: (String) -> Unit){
@@ -59,10 +79,14 @@ class ModelMediator(sPref: SharedPreferences) {
     }
 
     fun removeErrorListener(del: (String) -> Unit){
-        errorListeners.remove(del)
+        try {
+            errorListeners.remove(del)
+        }
+        catch(e: Exception) {e.printStackTrace()}
     }
 
     private fun resultUpdated(result: FieldResult){
+        Log.d("RESULT", "${result.Btot}")
         for (del in resulListeners){
             del(result)
         }

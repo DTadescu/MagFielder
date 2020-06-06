@@ -22,6 +22,8 @@
     <!-- Errors -->
     <string name="bad_signal">Плохой сигнал GPS</string>
     <string name="gps_seems_turnoff">Похоже, GPS отключен. Желаете включить?</string>
+    <string name="field_is_empty">Заполните все поля.</string>
+    <string name="format_exception">Некорректные данные.</string>
 
     <!-- Menu Titles -->
     <string name="menuGPS">GPS</string>
@@ -34,5 +36,9 @@
     <!-- Messages Preferences -->
     <string name="model_title">Магнитная модель:</string>
     <string name="shape_title">Форма земли:</string>
+    <string name="dateformat_title">Формат даты:</string>
+
+    <string name="send_to">Поделиться результатом через:</string>
+    <string name="copy_message">Скопировано в буффер обмена.</string>
 
 </resources>

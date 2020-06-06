@@ -1,6 +1,7 @@
 package shdv.example.magfielder.data
 
 
+import android.util.Log
 import shdv.example.magfielder.Utils.Operation.arrayMulDouble
 import java.lang.Exception
 import java.lang.Math.*
@@ -10,6 +11,7 @@ import shdv.example.magfielder.Utils.Operation.sinArray
 
 
 object IgrfUtils {
+    private val PI = 3.141592653589793240
 
     fun ggToGeo(_h:Double, gdcolat: Double):GeoParameters{
         val h = _h/1000
@@ -35,12 +37,14 @@ object IgrfUtils {
         return GeoParameters(rad, thc, sd, cd)
     }
 
-    fun synthValues(coeffs: ArrayList<Double>, _radius: Double, theta: Double, _phi: Double):FieldComponents{
+    fun synthValues(coeffs: ArrayList<Double>, _radius: Double, theta: Double, _phi: Double, nmax:Int = 13):FieldComponents{
         val radius = _radius/6371.2
+        //for(c in coeffs) Log.d("SYNTH","${c}")
         if(theta >= 180.0 || theta <= 0.0) throw ModelException("Invalid value.")
         val nmin = 1
-        val nmax = coeffs.size
+        //val nmax = coeffs.size
         if(nmax < nmin) throw ModelException("Invalid value.")
+        if(nmax > sqrt(coeffs.size.toDouble())) throw ModelException("Invalid value.")
 
         var r_n = radius.pow(-(nmin+2))
         val pnm = legendrePoly(nmax, theta)
@@ -65,15 +69,15 @@ object IgrfUtils {
             bTheta += -pnm[0][n+1]*r_n*coeffs[num]
             num++
             for (m in 1..n){
-                bRadius += (n+1)*pnm[n][m]*r_n*coeffs[num]*cmp[m] + coeffs[num+1]*smp[m]
-                bTheta += -pnm[m][n+1]*r_n*coeffs[num]*cmp[m] + coeffs[num+1]*smp[m]
+                bRadius += (n+1)*pnm[n][m]*r_n*(coeffs[num]*cmp[m] + coeffs[num+1]*smp[m])
+                bTheta += -pnm[m][n+1]*r_n*(coeffs[num]*cmp[m] + coeffs[num+1]*smp[m])
 
                 var divPnm = 0.0
                 try {
                     divPnm = pnm[n][m]/sinth
                 }
                 catch (e:Exception){}
-                bPhi += m*divPnm*r_n*coeffs[num]*smp[m]-coeffs[num+1]*cmp[m]
+                bPhi += m*divPnm*r_n*(coeffs[num]*smp[m]-coeffs[num+1]*cmp[m])
                 num += 2
             }
             r_n /= radius
@@ -84,7 +88,7 @@ object IgrfUtils {
 
     fun legendrePoly(nmax: Int, theta: Double): Array<DoubleArray>{
         val costh = kotlin.math.cos(toRadians(theta))
-        val sinth = kotlin.math.sqrt(1 - costh.pow(2.0))
+        val sinth = kotlin.math.sqrt(1 - costh.pow(2))
         val pnm = Array(nmax+1){DoubleArray(nmax+2)}
         for (n in pnm.indices){
             for (m in pnm[n].indices){
@@ -94,9 +98,10 @@ object IgrfUtils {
         pnm[0][0] = 1.0
         pnm[1][1] = sinth
 
-        var rootn = DoubleArray(((2* nmax.toDouble().pow(2.0) + 1).toInt()))
+        var rootn = DoubleArray(((2* (nmax.toDouble().pow(2)) + 1).toInt()))
         for(i in rootn.indices){
             rootn[i] = kotlin.math.sqrt(i.toDouble())
+           // Log.d("ROOTN", "${rootn[i]}")
         }
 
         for(m in 0 until nmax){
@@ -105,7 +110,7 @@ object IgrfUtils {
             if(m > 0){
                 pnm[m+1][m+1] = sinth*pnm_tmp/rootn[m+m+2]
             }
-            for (n in m+2..nmax){
+            for (n in (m+2)..nmax){
                 val d = n*n - m*m
                 val e = n + n - 1
                 pnm[n][m] = (e*costh*pnm[n-1][m] - rootn[d-e]*pnm[n-2][m])/rootn[d]
@@ -115,13 +120,13 @@ object IgrfUtils {
         pnm[1][2] = pnm[1][0]
         for(n in 2..nmax){
             pnm[0][n+1] = -kotlin.math.sqrt((n * n + n) / 2.0) *pnm[n][1]
-            pnm[1][n+1] = (0.5* kotlin.math.sqrt(2.0 * (n * n + n)) *pnm[n][0]
-                    - kotlin.math.sqrt((n*n+n-2).toDouble())*pnm[n][2])/2.0
+            pnm[1][n+1] = (kotlin.math.sqrt(2.0 * (n * n + n)) *pnm[n][0]
+                    - kotlin.math.sqrt(n*n+n-2.0)*pnm[n][2])/2
             for(m in 2 until n){
-                pnm[m][n+1] = (0.5*(kotlin.math.sqrt(((n + m) * (n - m + 1)).toDouble()) * pnm[n][m-1]
-                        - kotlin.math.sqrt(((n + m + 1) * (n - m)).toDouble()) * pnm[n][m+1]))
-                pnm[n][n+1] = kotlin.math.sqrt(2.0 * n) * pnm[n][n-1]/ 2
+                pnm[m][n+1] = 0.5*(kotlin.math.sqrt((n + m) * (n - m + 1.0)) * pnm[n][m-1]
+                        - kotlin.math.sqrt((n + m + 1.0) * (n - m)) * pnm[n][m+1])
             }
+            pnm[n][n+1] = kotlin.math.sqrt(2.0 * n) * pnm[n][n-1]/ 2
         }
         return pnm
     }

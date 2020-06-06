@@ -18,7 +18,7 @@
     <style name="InputStyle">
         <item name="android:textSize">18sp</item>
         <item name="android:background">@drawable/input_field</item>
-        <item name="android:inputType">numberDecimal</item>
+        <item name="android:inputType">numberDecimal|numberSigned</item>
     </style>
 
     <style name="ResultField">
