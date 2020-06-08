@@ -10,10 +10,13 @@
     <string name="calculate">Calculate</string>
     <string name="clear">Clear</string>
     <string name="results">Results</string>
-    <string name="Bhor">Bhor(nT):</string>
+    <string name="Bhor">Bxy(nT):</string>
     <string name="Btotal">Btotal(nT):</string>
-    <string name="DIP">Decl(deg):</string>
-    <string name="INCL">Incl(deg):</string>
+    <string name="Decl">North corr.(deg):</string>
+    <string name="INCL">DIP(deg):</string>
+    <string name="north_comp">North comp.(nT)</string>
+    <string name="east_comp">East comp.(nT)</string>
+    <string name="vert_comp">Vertical comp.(nT)</string>
     <string name="serialError">Serialization error</string>
     <string name="title_activity_settings">Settings</string>
     <string name="yes">Yes</string>
@@ -31,11 +34,21 @@
 
     <!-- Preference Titles -->
     <string name="models_header">Model settings</string>
+    <string name="results_header">Results output</string>
 
     <!-- Messages Preferences -->
     <string name="model_title">Magnetic model:</string>
     <string name="shape_title">Shape of Earth:</string>
     <string name="dateformat_title">Date format:</string>
+    
+    <!-- Results Preferences -->
+    <string name="btotal_show" translatable="false">Btotal</string>
+    <string name="dip_show" translatable="false">DIP</string>
+    <string name="decl_show" translatable="false">North correction</string>
+    <string name="bxy_show" translatable="false">Bxy</string>
+    <string name="north_show" translatable="false">North component</string>
+    <string name="east_show" translatable="false">East component</string>
+    <string name="vert_show" translatable="false">Vertical component</string>
 
     <string name="send_to">Share results via:</string>
     <string name="copy_message">Copied to clipboard.</string>

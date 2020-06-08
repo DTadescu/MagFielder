@@ -10,10 +10,13 @@
     <string name="calculate">Рассчитать</string>
     <string name="clear">Очистить</string>
     <string name="results">Результаты</string>
-    <string name="Bhor">Bhor(нТл):</string>
+    <string name="Bhor">Bxy(нТл):</string>
     <string name="Btotal">Btotal(нТл):</string>
-    <string name="DIP">Decl(град):</string>
-    <string name="INCL">Incl(град):</string>
+    <string name="Decl">North corr.(град):</string>
+    <string name="INCL">DIP(град):</string>
+    <string name="north_comp">North comp.(нТл)</string>
+    <string name="east_comp">East comp.(нТл)</string>
+    <string name="vert_comp">Vertical comp.(нТл)</string>
     <string name="serialError">Ошибка сериализации</string>
     <string name="title_activity_settings">Настройки</string>
     <string name="yes">Да</string>
@@ -32,6 +35,7 @@
 
     <!-- Preference Titles -->
     <string name="models_header">Настройки модели</string>
+    <string name="results_header">Вывод результатов</string>
 
     <!-- Messages Preferences -->
     <string name="model_title">Магнитная модель:</string>

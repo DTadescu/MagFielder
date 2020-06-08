@@ -7,8 +7,21 @@ import shdv.example.magfielder.Utils.DateFormatter
 
 class ModelMediator(sPref: SharedPreferences) {
     val model:ModelDispatcher
-    private val modelType = sPref.getString("model", "0")?.toInt()?:0
-    private val shape = sPref.getString("shape", "0")?.toInt()?:0
+    private val modelType =
+        try{
+            sPref.getString("model", "0")!!.toInt()
+        }
+        catch(e:Exception){
+            e.printStackTrace()
+            0
+        }
+    private val shape = try{
+        sPref.getString("shape", "1")!!.toInt()
+    }
+    catch (e:Exception){
+        e.printStackTrace()
+        1
+    }
     private val dateFormat = sPref.getString("dateformat","dd/MM/yyyy")?:"yyyy/MM/dd"
 
     private var resulListeners: ArrayList<(FieldResult) -> Unit> = arrayListOf(fun(_:FieldResult){})
@@ -20,10 +33,6 @@ class ModelMediator(sPref: SharedPreferences) {
             0 -> {
                 model = IGRFDispather(shape)
                 Log.d("NEWMODEL","IGRF")
-            }
-            1 -> {
-               model = WMMDispatcher(shape)
-                Log.d("NEWMODEL","WMM")
             }
             else -> {
                 model = IGRFDispather(shape)

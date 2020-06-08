@@ -5,7 +5,7 @@
 
 
         <ListPreference
-            app:defaultValue="IGRF"
+            app:defaultValue="0"
             app:entries="@array/model_entries"
             app:entryValues="@array/model_values"
             app:key="model"
@@ -15,7 +15,7 @@
             />
 
         <ListPreference
-            app:defaultValue="Ellipse"
+            app:defaultValue="1"
             app:entries="@array/shape_entries"
             app:entryValues="@array/shape_values"
             app:key="shape"
@@ -34,6 +34,47 @@
 
             />
 
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/results_header">
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:title="@string/btotal_show"
+            android:key="btotal"
+            android:enabled="false"
+            />
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:title="@string/decl_show"
+            android:key="declination"
+            android:enabled="false"
+            />
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:title="@string/dip_show"
+            android:key="inclination"
+            android:enabled="false"
+            />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:title="@string/bxy_show"
+            android:key="bxy"
+            />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:title="@string/north_show"
+            android:key="northComp"
+            />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:title="@string/east_show"
+            android:key="eastComp"
+            />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:title="@string/vert_show"
+            android:key="vertComp"
+            />
     </PreferenceCategory>
 
 

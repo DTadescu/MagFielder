@@ -104,7 +104,7 @@ class DateFormatter(_format: DateFormat) {
         }
     }
 
-    private fun getDateFromString(dString:String):UserDate{
+    fun getDateFromString(dString:String):UserDate{
         try {
             var day = 0;
             var month = 0;

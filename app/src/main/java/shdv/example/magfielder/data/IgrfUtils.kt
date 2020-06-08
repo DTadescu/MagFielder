@@ -137,7 +137,7 @@ object IgrfUtils {
         val btot = sqrt(hsq + z*z)
         val dec = toDegrees(atan2(y, x))
         val inc = toDegrees(atan2(z, bhor))
-        return FieldResult(dec, bhor, inc, btot)
+        return FieldResult(dec, bhor, inc, btot, x, y, z)
     }
 
 

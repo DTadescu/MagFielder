@@ -39,7 +39,7 @@ import java.util.*
 class MainActivity : AppCompatActivity() {
     private lateinit var mGpsUtils:GpsUtils
 
-
+    private lateinit var dateFormat: DateFormat
     private lateinit var sPref: SharedPreferences
     private var modeler:ModelMediator? = null
 
@@ -55,6 +55,7 @@ class MainActivity : AppCompatActivity() {
         btnShare.setOnClickListener{shareResult()}
         btnCopy.setOnClickListener{copyResult()}
         sPref = PreferenceManager.getDefaultSharedPreferences(this)
+        setVisiblity()
         calcBtn.setOnClickListener{calcModel()}
         defaultFields()
         //Toast.makeText(this, sPref.getString("model", "0"), Toast.LENGTH_LONG).show()
@@ -67,6 +68,8 @@ class MainActivity : AppCompatActivity() {
         super.onResume()
         if(mGpsUtils.checkLocationPermissions(this))
                 mGpsUtils.startLocationUpdates(this)
+        setVisiblity()
+        checkDate()
     }
 
     override fun onPause() {
@@ -91,10 +94,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun OnResultListener(result: FieldResult){
-        bHorRes.setText("%.1f".format(result.Bhor).replace(',','.'))
         refBtres.setText("%.1f".format(result.Btot).replace(',','.'))
-        DIPres.setText("%.2f".format(result.Dec).replace(',','.'))
+        DeclRes.setText("%.2f".format(result.Dec).replace(',','.'))
         INCLres.setText("%.2f".format(result.Inc).replace(',','.'))
+        bHorRes.setText("%.1f".format(result.Bhor).replace(',','.'))
+        nCompRes.setText("%.1f".format(result.North).replace(',','.'))
+        eCompRes.setText("%.1f".format(result.East).replace(',','.'))
+        vCompRes.setText("%.1f".format(result.Vert).replace(',','.'))
+
         progressLayout?.visibility = View.GONE
     }
 
@@ -190,10 +197,21 @@ class MainActivity : AppCompatActivity() {
         reporter.add(getString(R.string.latitude), latitudeEdit.text.toString())
         reporter.add(getString(R.string.longitude), longitudeEdit.text.toString())
         reporter.add(getString(R.string.altitude), altitudeEdit.text.toString())
-        reporter.add(getString(R.string.Bhor), bHorRes.text.toString())
-        reporter.add(getString(R.string.Btotal), refBtres.text.toString())
-        reporter.add(getString(R.string.DIP), DIPres.text.toString())
-        reporter.add(getString(R.string.INCL), INCLres.text.toString())
+        if(btot_layout.visibility == View.VISIBLE)
+            reporter.add(getString(R.string.Btotal), refBtres.text.toString())
+        if(decl_layout.visibility == View.VISIBLE)
+            reporter.add(getString(R.string.Decl), DeclRes.text.toString())
+        if(incl_layout.visibility == View.VISIBLE)
+            reporter.add(getString(R.string.INCL), INCLres.text.toString())
+        if(bxy_layout.visibility == View.VISIBLE)
+            reporter.add(getString(R.string.Bhor), bHorRes.text.toString())
+        if(ncomp_layout.visibility == View.VISIBLE)
+            reporter.add(getString(R.string.north_comp), nCompRes.text.toString())
+        if(ecomp_layout.visibility == View.VISIBLE)
+            reporter.add(getString(R.string.east_comp), eCompRes.text.toString())
+        if(vcomp_layout.visibility == View.VISIBLE)
+            reporter.add(getString(R.string.vert_comp), vCompRes.text.toString())
+
         return reporter.report
     }
 
@@ -222,9 +240,32 @@ class MainActivity : AppCompatActivity() {
         altitudeEdit.setText("")
         bHorRes.setText("")
         refBtres.setText("")
-        DIPres.setText("")
+        DeclRes.setText("")
         INCLres.setText("")
-        dateEdit.setText(DateFormatter(DateFormat.getFormat(sPref.getString("dateformat","dd/MM/yyyy")?:"yyyy/MM/dd"))
+        nCompRes.setText("")
+        eCompRes.setText("")
+        vCompRes.setText("")
+        dateFormat = DateFormat.getFormat(sPref.getString("dateformat","dd/MM/yyyy")?:"yyyy/MM/dd")
+        dateEdit.setText(DateFormatter(dateFormat)
             .getCurrentDate())
+    }
+
+    private fun checkDate(){
+        val newFormat = DateFormat.getFormat(sPref.getString("dateformat","dd/MM/yyyy")?:"yyyy/MM/dd")
+        if(dateFormat != newFormat){
+            val date = DateFormatter(dateFormat).getDateFromString(dateEdit.text.toString())
+            dateEdit.setText(DateFormatter(newFormat).getStringFromDate(date))
+            dateFormat = newFormat
+        }
+    }
+
+    private fun setVisiblity(){
+        btot_layout.visibility = if(sPref.getBoolean("btotal", true)) View.VISIBLE else View.GONE
+        decl_layout.visibility = if(sPref.getBoolean("declination", true)) View.VISIBLE else View.GONE
+        incl_layout.visibility = if(sPref.getBoolean("inclination", true)) View.VISIBLE else View.GONE
+        bxy_layout.visibility = if(sPref.getBoolean("bxy", false)) View.VISIBLE else View.GONE
+        ncomp_layout.visibility = if(sPref.getBoolean("northComp", false)) View.VISIBLE else View.GONE
+        ecomp_layout.visibility = if(sPref.getBoolean("eastComp", false)) View.VISIBLE else View.GONE
+        vcomp_layout.visibility = if(sPref.getBoolean("vertComp", false)) View.VISIBLE else View.GONE
     }
 }
