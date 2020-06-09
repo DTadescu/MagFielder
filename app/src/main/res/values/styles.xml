@@ -10,6 +10,13 @@
         <item name="android:textColorSecondary">@color/ivory</item>
     </style>
 
+    <style name="DialogWindowStyle" parent="Base.Theme.AppCompat.Dialog">
+        <item name="android:windowMinWidthMajor">95%</item>
+        <item name="android:windowMinWidthMinor">95%</item>
+        <item name="windowFixedHeightMajor">95%</item>
+        <item name="windowFixedHeightMinor">95%</item>
+    </style>
+
     <style name="LabelStyle">
         <item name="android:textColor">@color/label</item>
         <item name="android:textSize">18sp</item>

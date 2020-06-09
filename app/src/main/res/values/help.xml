@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="help_body">
+\n<b>Latitude</b> - enter the North latitude signed \'+\', South latitude - signed \'-\' in a decimal format. For example, 60.25 - 60deg 15m North latitude.
+\n<b>Longitude</b> - enter the East longitude signed \'+\', West longitude - signed \'-\' in a decimal format. For example, -30.25 - 30deg 15m West longitude.
+\n<b>Altitude</b> - enter the mean sea level in a meters.
+\n<b>Earth shape</b> - select between sphere or ellipsoid (recommended) due to EGS-84 model.
+\n<b>Btotal</b> -  total Earth magnetic field intensity.
+\n<b>North correction</b> - magnetic declination: the angle between the direction of geographical North and the direction of magnetic North.
+\n<b>DIP</b> - magnetic inclination: the angle the arrow is deflected by the Earth\'s magnetic field in the vertical plane.
+\n<b>Bxy</b> - projection of the total intensity of the magnetic field on the plane of the Earth\'s surface.
+\n<b>North component</b> - projection of the magnetic field on the North-South axis.
+\n<b>East component</b> - projection of the magnetic field on the West-East axis
+\n<b>Vertical component</b> - projection of the magnetic field on the vertical axis.
+
+    </string>
+</resources>

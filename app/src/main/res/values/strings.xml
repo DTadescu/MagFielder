@@ -2,7 +2,7 @@
     <!-- Main screen -->
     <string name="app_name">MagFielder</string>
     <string name="latitude">Latitude:</string>
-    <string name="hint">Enter like 60.155</string>
+    <string name="hint">Decimal format</string>
     <string name="longitude">Longitude:</string>
     <string name="altitude">Altitude(m):</string>
     <string name="date">Date:</string>
@@ -14,10 +14,9 @@
     <string name="Btotal">Btotal(nT):</string>
     <string name="Decl">North corr.(deg):</string>
     <string name="INCL">DIP(deg):</string>
-    <string name="north_comp">North comp.(nT)</string>
-    <string name="east_comp">East comp.(nT)</string>
-    <string name="vert_comp">Vertical comp.(nT)</string>
-    <string name="serialError">Serialization error</string>
+    <string name="north_comp">North comp.(nT):</string>
+    <string name="east_comp">East comp.(nT):</string>
+    <string name="vert_comp">Vertical comp.(nT):</string>
     <string name="title_activity_settings">Settings</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
@@ -28,9 +27,8 @@
     <string name="field_is_empty">Fill all input fields.</string>
     <string name="format_exception">Invalid input data.</string>
     <!-- Menu Titles -->
-    <string name="menuGPS">GPS</string>
-    <string name="menuGPSON">GPS(On)</string>
     <string name="menuSettings">Settings</string>
+    <string name="menuInfo">Help</string>
 
     <!-- Preference Titles -->
     <string name="models_header">Model settings</string>

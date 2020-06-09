@@ -5,6 +5,11 @@
 
    >
     <item
+        android:id="@+id/infoBut"
+        android:icon="@android:drawable/ic_menu_help"
+        android:title="@string/menuSettings"
+        app:showAsAction="always" />
+    <item
         android:id="@+id/settingsBut"
         android:icon="@android:drawable/ic_menu_preferences"
         android:title="@string/menuSettings"

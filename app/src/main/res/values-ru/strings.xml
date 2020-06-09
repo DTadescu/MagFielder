@@ -2,7 +2,7 @@
     <!-- Main screen -->
     <string name="app_name">MagFielder</string>
     <string name="latitude">Широта:</string>
-    <string name="hint">Введите значение, например, 60.155</string>
+    <string name="hint">Десятичный формат</string>
     <string name="longitude">Долгота:</string>
     <string name="altitude">Высота(м):</string>
     <string name="date">Дата:</string>
@@ -14,10 +14,9 @@
     <string name="Btotal">Btotal(нТл):</string>
     <string name="Decl">North corr.(град):</string>
     <string name="INCL">DIP(град):</string>
-    <string name="north_comp">North comp.(нТл)</string>
-    <string name="east_comp">East comp.(нТл)</string>
-    <string name="vert_comp">Vertical comp.(нТл)</string>
-    <string name="serialError">Ошибка сериализации</string>
+    <string name="north_comp">North comp.(нТл):</string>
+    <string name="east_comp">East comp.(нТл):</string>
+    <string name="vert_comp">Vertical comp.(нТл):</string>
     <string name="title_activity_settings">Настройки</string>
     <string name="yes">Да</string>
     <string name="no">Нет</string>
@@ -29,9 +28,8 @@
     <string name="format_exception">Некорректные данные.</string>
 
     <!-- Menu Titles -->
-    <string name="menuGPS">GPS</string>
-    <string name="menuGPSON">GPS(On)</string>
     <string name="menuSettings">Настройки</string>
+    <string name="menuInfo">Справка</string>
 
     <!-- Preference Titles -->
     <string name="models_header">Настройки модели</string>

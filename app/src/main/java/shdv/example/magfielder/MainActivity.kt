@@ -28,6 +28,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.preference.PreferenceManager
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.info_dialog.*
 import kotlinx.coroutines.*
 import shdv.example.magfielder.Utils.*
 import shdv.example.magfielder.data.FieldResult
@@ -44,8 +45,6 @@ class MainActivity : AppCompatActivity() {
     private var modeler:ModelMediator? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        //if(!isInit) initSettings()
-        //runBlocking { delay(500) }
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
        mGpsUtils = GpsUtils(getSystemService(LOCATION_SERVICE) as LocationManager)
@@ -58,8 +57,6 @@ class MainActivity : AppCompatActivity() {
         setVisiblity()
         calcBtn.setOnClickListener{calcModel()}
         defaultFields()
-        //Toast.makeText(this, sPref.getString("model", "0"), Toast.LENGTH_LONG).show()
-        //supportActionBar?.setDisplayShowTitleEnabled(false)
     }
 
 
@@ -89,8 +86,21 @@ class MainActivity : AppCompatActivity() {
 
                 openSettings()
             }
+
+            R.id.infoBut -> {
+                openHelp()
+            }
         }
         return true
+    }
+
+    private fun openHelp(){
+        UIHelper.getSimpleDialog(this, R.layout.info_dialog)
+            .apply {
+                ok_info.setOnClickListener { dismiss() }
+
+                show()
+            }
     }
 
     private fun OnResultListener(result: FieldResult){
@@ -222,7 +232,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun setDate(){
         val dFormatter = DateFormatter(DateFormat.DMY)
-        //dateEdit.setText(dFormatter.getCurrentDate())
         dFormatter.changeDate(this, DatePickerDialog.OnDateSetListener(::dateListener))
     }
 
