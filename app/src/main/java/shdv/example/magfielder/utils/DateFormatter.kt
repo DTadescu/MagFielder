@@ -1,4 +1,4 @@
-package shdv.example.magfielder.Utils
+package shdv.example.magfielder.utils
 
 import android.app.DatePickerDialog
 import android.content.Context

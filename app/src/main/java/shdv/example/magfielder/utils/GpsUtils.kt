@@ -1,4 +1,4 @@
-package shdv.example.magfielder.Utils
+package shdv.example.magfielder.utils
 
 import android.Manifest
 import android.app.Activity
@@ -14,8 +14,6 @@ import androidx.core.app.ActivityCompat
 import androidx.core.app.ActivityCompat.startActivityForResult
 import com.google.android.gms.location.*
 import shdv.example.magfielder.R
-import androidx.fragment.app.FragmentActivity
-import androidx.core.content.ContextCompat
 
 class GpsUtils(_locationManager: LocationManager) {
     var mLastLocation: Location? = null

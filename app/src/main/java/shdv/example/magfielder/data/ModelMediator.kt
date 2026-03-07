@@ -2,8 +2,7 @@ package shdv.example.magfielder.data
 
 import android.content.SharedPreferences
 import android.util.Log
-import shdv.example.magfielder.Utils.DateFormat
-import shdv.example.magfielder.Utils.DateFormatter
+import shdv.example.magfielder.utils.DateFormat
 
 class ModelMediator(sPref: SharedPreferences) {
     val model:ModelDispatcher

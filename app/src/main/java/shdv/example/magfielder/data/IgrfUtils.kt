@@ -1,13 +1,12 @@
 package shdv.example.magfielder.data
 
 
-import android.util.Log
-import shdv.example.magfielder.Utils.Operation.arrayMulDouble
+import shdv.example.magfielder.utils.Operation.arrayMulDouble
 import java.lang.Exception
 import java.lang.Math.*
 import kotlin.math.pow
-import shdv.example.magfielder.Utils.Operation.cosArray
-import shdv.example.magfielder.Utils.Operation.sinArray
+import shdv.example.magfielder.utils.Operation.cosArray
+import shdv.example.magfielder.utils.Operation.sinArray
 
 
 object IgrfUtils {

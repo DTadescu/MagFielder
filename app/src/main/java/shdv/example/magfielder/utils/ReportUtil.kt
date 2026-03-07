@@ -1,4 +1,4 @@
-package shdv.example.magfielder.Utils
+package shdv.example.magfielder.utils
 
 enum class ReportFormat(val value: Int){
 TXT(0)

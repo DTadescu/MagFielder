@@ -1,9 +1,8 @@
 package shdv.example.magfielder.data
 
 import android.util.Log
-import shdv.example.magfielder.Utils.DateFormat
-import shdv.example.magfielder.Utils.DateFormatter
-import java.lang.Exception
+import shdv.example.magfielder.utils.DateFormat
+import shdv.example.magfielder.utils.DateFormatter
 
 open class ModelDispatcher(_shape: Int) {
     private val shape = _shape

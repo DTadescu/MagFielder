@@ -1,7 +1,4 @@
-package shdv.example.magfielder.Utils
-
-import kotlinx.android.synthetic.main.activity_main.view.*
-import shdv.example.magfielder.R
+package shdv.example.magfielder.utils
 
 enum class Language(val value: String) {
     RUSSIAN("ru"), ENGLISH("en")

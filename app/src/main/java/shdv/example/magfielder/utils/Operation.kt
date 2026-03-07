@@ -1,4 +1,4 @@
-package shdv.example.magfielder.Utils
+package shdv.example.magfielder.utils
 
 import kotlin.math.cos
 import kotlin.math.sin
