@@ -23,7 +23,7 @@ enum class DateFormat(val value: String) {
 class UserDate(_day: Int, _month: Int, _year:Int){
     var day:Int = 1
         set(value) {
-           field = if (value in 1..30) value
+           field = if (value in 1..31) value
             else 1
         }
 
@@ -33,10 +33,10 @@ class UserDate(_day: Int, _month: Int, _year:Int){
             else 1
         }
 
-    var year:Int = 2020
+    var year:Int = 2025
         set(value) {
-            field = if (value in 2020..2099) value
-            else 2020
+            field = if (value in 1900..2099) value
+            else 2025
         }
 
     init {
@@ -104,7 +104,7 @@ class DateFormatter(_format: DateFormat) {
         }
     }
 
-    fun getDateFromString(dString:String):UserDate{
+    fun getDateFromString(dString:String):UserDate {
         try {
             var day = 0;
             var month = 0;

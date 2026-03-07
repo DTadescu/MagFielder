@@ -1,7 +1,11 @@
 package shdv.example.magfielder
 
 import android.app.DatePickerDialog
-import android.content.*
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import android.location.LocationManager
 import android.nfc.FormatException
 import android.os.Bundle
@@ -13,17 +17,23 @@ import android.widget.DatePicker
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.preference.PreferenceManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import shdv.example.magfielder.data.FieldResult
-import shdv.example.magfielder.utils.*
 import shdv.example.magfielder.data.ModelMediator
 import shdv.example.magfielder.databinding.ActivityMainBinding
-import androidx.core.view.isVisible
 import shdv.example.magfielder.databinding.InfoDialogBinding
+import shdv.example.magfielder.utils.DateFormat
+import shdv.example.magfielder.utils.DateFormatter
+import shdv.example.magfielder.utils.GpsUtils
+import shdv.example.magfielder.utils.ReportFormat
+import shdv.example.magfielder.utils.ReportUtil
+import shdv.example.magfielder.utils.UIHelper
+import shdv.example.magfielder.utils.UserDate
 
 
 class MainActivity : AppCompatActivity() {
@@ -37,7 +47,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-       mGpsUtils = GpsUtils(getSystemService(LOCATION_SERVICE) as LocationManager)
+        mGpsUtils = GpsUtils(getSystemService(LOCATION_SERVICE) as LocationManager)
         binding.setlocationBtn.setOnClickListener{getCurrentLocation()}
         binding.clrBtn.setOnClickListener { defaultFields() }
         binding.dateEdit.setOnClickListener{setDate()}

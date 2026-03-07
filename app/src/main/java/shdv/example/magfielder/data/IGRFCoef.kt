@@ -1,33 +1,21 @@
 package shdv.example.magfielder.data
 
+import java.io.InputStream
 import kotlin.math.pow
 
 object IGRFCoef {
-    //var delegate:((Double, Double, Double, Double)->DoubleArray) = ::interp1d
-    private val startDate = 2020.0
-    private val endDate = 2025.0
-    private val startArray = doubleArrayOf(-29404.8, -1450.9, 4652.5, -2499.6, 2982.0, -2991.6, 1677.0, -734.6, 1363.2, -2381.2, -82.1, 1236.2, 241.9, 525.7, -543.4, 903.0, 809.5,
-        281.9, 86.3, -158.4, -309.4, 199.7, 48.0, -349.7, -234.3, 363.2, 47.7, 187.8, 208.3, -140.7, -121.2, -151.2, 32.3, 13.5, 98.9, 66.0, 65.5,
-        -19.1, 72.9, 25.1, -121.5, 52.8, -36.2, -64.5, 13.5, 8.9, -64.7, 68.1, 80.6, -76.7, -51.5, -8.2, -16.9, 56.5, 2.2, 15.8, 23.5, 6.4, -2.2,
-        -7.2, -27.2, 9.8, -1.8, 23.7, 9.7, 8.4, -17.6, -15.3, -0.5, 12.8, -21.1, -11.7, 15.3, 14.9, 13.7, 3.6, -16.5, -6.9, -0.3, 2.8, 5.0, 8.4,
-        -23.4, 2.9, 11.0, -1.5, 9.8, -1.1, -5.1, -13.2, -6.3, 1.1, 7.8, 8.8, 0.4, -9.3, -1.4, -11.9, 9.6, -1.9, -6.2, 3.4, -0.1, -0.2, 1.7, 3.6,
-        -0.9, 4.8, 0.7, -8.6, -0.9, -0.1, 1.9, -4.3, 1.4, -3.4, -2.4, -0.1, -3.8, -8.8, 3.0, -1.4, 0.0, -2.5, 2.5, 2.3, -0.6, -0.9, -0.4, 0.3,
-        0.6, -0.7, -0.2, -0.1, -1.7, 1.4, -1.6, -0.6, -3.0, 0.2, -2.0, 3.1, -2.6, -2.0, -0.1, -1.2, 0.5, 0.5, 1.3, 1.4, -1.2, -1.8, 0.7, 0.1, 0.3,
-        0.8, 0.5, -0.2, -0.3, 0.6, -0.5, 0.2, 0.1, -0.9, -1.1, 0.0, -0.3, 0.5, 0.1, -0.9, -0.9, 0.5, 0.6, 0.7, 1.4, -0.3, -0.4, 0.8, -1.3, 0.0,
-        -0.1, 0.8, 0.3, 0.0, -0.1, 0.4, 0.5, 0.1, 0.5, 0.5, -0.4, -0.5, -0.4, -0.4, -0.6)
-    private val endArray = doubleArrayOf(
-        -29376.3, -1413.9, 4523.0, -2554.6, 2947.0, -3142.6, 1666.5, -846.6, 1374.2, -2410.7, -52.1, 1251.7, 236.4, 465.7, -540.9, 897.0, 801.5,
-        281.4, 56.8, -125.9, -283.4, 217.7, 22.5, -374.7, -235.8, 365.7, 47.7, 184.8, 220.8, -139.7, -124.2, -144.7, 47.3, 18.0, 100.4, 63.5, 64.0,
-        -19.1, 74.9, 17.1, -115.0, 46.3, -43.2, -60.5, 13.5, 8.9, -60.2, 73.1, 80.1, -77.7, -48.5, -8.2, -13.9, 60.0, -1.8, 16.3, 22.5, 3.9, -7.7,
-        -11.2, -26.7, 13.8, -0.3, 23.7, 10.2, 7.4, -18.1, -12.3, 1.5, 11.8, -21.6, -9.2, 17.3, 13.4, 15.2, 1.6, -17.0, -4.4, 1.7, 2.8, 5.0, 8.4,
-        -23.4, 2.9, 11.0, -1.5, 9.8, -1.1, -5.1, -13.2, -6.3, 1.1, 7.8, 8.8, 0.4, -9.3, -1.4, -11.9, 9.6, -1.9, -6.2, 3.4, -0.1, -0.2, 1.7, 3.6,
-        -0.9, 4.8, 0.7, -8.6, -0.9, -0.1, 1.9, -4.3, 1.4, -3.4, -2.4, -0.1, -3.8, -8.8, 3.0, -1.4, 0.0, -2.5, 2.5, 2.3, -0.6, -0.9, -0.4, 0.3,
-        0.6, -0.7, -0.2, -0.1, -1.7, 1.4, -1.6, -0.6, -3.0, 0.2, -2.0, 3.1, -2.6, -2.0, -0.1, -1.2, 0.5, 0.5, 1.3, 1.4, -1.2, -1.8, 0.7, 0.1,
-        0.3, 0.8, 0.5, -0.2, -0.3, 0.6, -0.5, 0.2, 0.1, -0.9, -1.1, 0.0, -0.3, 0.5, 0.1, -0.9, -0.9, 0.5, 0.6, 0.7, 1.4, -0.3, -0.4, 0.8, -1.3,
-        0.0, -0.1, 0.8, 0.3, 0.0, -0.1, 0.4, 0.5, 0.1, 0.5, 0.5, -0.4, -0.5, -0.4, -0.4, -0.6)
-    val coefArray = getFuncArray()
+    private var isInit = false
+    private var yearsMap = YearsMap()
 
     private fun getFuncArray():ArrayList<DoubleArray>?{
+        val startArray = yearsMap.startArray
+            ?: throw IllegalArgumentException("IGRF coefficients not yet initialized")
+        val endArray = yearsMap.endArray
+            ?: throw IllegalArgumentException("IGRF coefficients not yet initialized")
+        val startDate = yearsMap.startDate
+            ?: throw IllegalArgumentException("IGRF coefficients not yet initialized")
+        val endDate = yearsMap.endDate
+            ?: throw IllegalArgumentException("IGRF coefficients not yet initialized")
         val count = if(startArray.size < endArray.size)
                             startArray.size
                     else endArray.size
@@ -50,9 +38,36 @@ object IGRFCoef {
     }
 
     fun calculateCoeffs(point: Double): ArrayList<Double>?{
-        if (coefArray == null) return null
-        if (coefArray.size < 1) return null
-        val resArray = ArrayList<Double>(coefArray.size)
+        if (!isInit) return null
+        val resArray = ArrayList<Double>(195)
+
+        val minStartYear = yearsMap.data.keys.min()
+        val maxStartYear = yearsMap.data.keys.max()
+
+        val startYear = ((point.toInt() / 5) * 5).takeIf { it >= minStartYear } ?: minStartYear
+        val endYear = startYear + 5
+        val startArrayRaw = yearsMap.data[startYear] ?: yearsMap.data[maxStartYear] ?: return null
+        val startArray = (0..194).map {
+            startArrayRaw.getOrElse(it) { 0.0 }
+        }.toDoubleArray()
+        val endArrayRaw = yearsMap.data[endYear]
+        val endArray = endArrayRaw?.let {
+            (0..194).map {
+                endArrayRaw.getOrElse(it) { 0.0 }
+            }.toDoubleArray()
+        } ?: run {
+            startArray.mapIndexed { index, d ->
+                d + yearsMap.sv.getOrElse(index) { 0.0 }
+            }.toDoubleArray()
+        }
+        yearsMap.startDate = startYear.toDouble()
+        yearsMap.endDate = endYear.toDouble()
+        yearsMap.startArray = startArray
+        yearsMap.endArray = endArray
+
+        val coefArray = getFuncArray()
+        if (coefArray.isNullOrEmpty()) return null
+
         for (pol in coefArray){
             if(pol.size < 2) return null
             var coef = 0.0
@@ -63,4 +78,39 @@ object IGRFCoef {
         }
         return resArray
     }
+
+    fun init(files: Map<String, () -> InputStream>) {
+        if (isInit) return
+
+        fun readStream(stream: InputStream): List<Double> =
+            stream.bufferedReader().lineSequence()
+                .map { it.trim() }
+                .filter { it.isNotEmpty() }
+                .map { it.replace(",",".").toDouble() }
+                .toList()
+
+        val sv = files.entries.firstOrNull { it.key.equals("sv", ignoreCase = true) }
+            ?.value
+            ?.invoke()
+            ?.use { readStream(it) }
+            ?: emptyList()
+
+        val data = files.mapNotNull { (name, stream) ->
+            name.toIntOrNull()?.let { year ->
+                year to stream.invoke().use { readStream(it) }
+            }
+        }.toMap()
+
+        yearsMap = YearsMap(data, sv)
+        isInit = true
+    }
+
+    data class YearsMap(
+        val data: Map<Int, List<Double>> = mapOf(),
+        val sv: List<Double> = emptyList(),
+        var startArray: DoubleArray? = null,
+        var endArray: DoubleArray? = null,
+        var startDate: Double? = null,
+        var endDate: Double? = null,
+    )
 }
