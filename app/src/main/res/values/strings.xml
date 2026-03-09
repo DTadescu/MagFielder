@@ -38,7 +38,7 @@
     <string name="model_title">Magnetic model:</string>
     <string name="shape_title">Shape of Earth:</string>
     <string name="dateformat_title">Date format:</string>
-    
+
     <!-- Results Preferences -->
     <string name="btotal_show" translatable="false">Btotal</string>
     <string name="dip_show" translatable="false">DIP</string>

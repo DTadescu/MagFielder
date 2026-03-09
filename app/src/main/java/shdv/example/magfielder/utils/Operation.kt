@@ -4,28 +4,28 @@ import kotlin.math.cos
 import kotlin.math.sin
 
 object Operation {
-    fun arrayMulDouble(array: DoubleArray, arg: Double):DoubleArray{
+    fun arrayMulDouble(array: DoubleArray, arg: Double): DoubleArray {
         val newarr = array.clone()
-        for(n in array.indices){
-            newarr[n] = array[n]*arg
+        for (n in array.indices) {
+            newarr[n] = array[n] * arg
         }
-        return  newarr
+        return newarr
     }
 
-    fun cosArray(array: DoubleArray):DoubleArray{
+    fun cosArray(array: DoubleArray): DoubleArray {
         val newarr = array.clone()
-        for(n in array.indices){
+        for (n in array.indices) {
             newarr[n] = cos(array[n])
         }
-        return  newarr
+        return newarr
     }
 
-    fun sinArray(array: DoubleArray):DoubleArray{
+    fun sinArray(array: DoubleArray): DoubleArray {
         val newarr = array.clone()
-        for(n in array.indices){
+        for (n in array.indices) {
             newarr[n] = sin(array[n])
         }
-        return  newarr
+        return newarr
     }
 }
 

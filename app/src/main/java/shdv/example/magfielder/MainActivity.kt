@@ -34,37 +34,38 @@ import shdv.example.magfielder.utils.ReportFormat
 import shdv.example.magfielder.utils.ReportUtil
 import shdv.example.magfielder.utils.UIHelper
 import shdv.example.magfielder.utils.UserDate
+import shdv.example.magfielder.utils.toLatitude
+import shdv.example.magfielder.utils.toLongitude
 
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var mGpsUtils:GpsUtils
+    private lateinit var mGpsUtils: GpsUtils
     private lateinit var dateFormat: DateFormat
     private lateinit var sPref: SharedPreferences
     private lateinit var binding: ActivityMainBinding
-    private var modeler:ModelMediator? = null
+    private var modeler: ModelMediator? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         mGpsUtils = GpsUtils(getSystemService(LOCATION_SERVICE) as LocationManager)
-        binding.setlocationBtn.setOnClickListener{getCurrentLocation()}
+        binding.setlocationBtn.setOnClickListener { getCurrentLocation() }
         binding.clrBtn.setOnClickListener { defaultFields() }
-        binding.dateEdit.setOnClickListener{setDate()}
-        binding.btnShare.setOnClickListener{shareResult()}
-        binding.btnCopy.setOnClickListener{copyResult()}
+        binding.dateEdit.setOnClickListener { setDate() }
+        binding.btnShare.setOnClickListener { shareResult() }
+        binding.btnCopy.setOnClickListener { copyResult() }
         sPref = PreferenceManager.getDefaultSharedPreferences(this)
         setVisiblity()
-        binding.calcBtn.setOnClickListener{calcModel()}
+        binding.calcBtn.setOnClickListener { calcModel() }
         defaultFields()
     }
 
 
-
     override fun onResume() {
         super.onResume()
-        if(mGpsUtils.checkLocationPermissions(this))
-                mGpsUtils.startLocationUpdates(this)
+        if (mGpsUtils.checkLocationPermissions(this))
+            mGpsUtils.startLocationUpdates(this)
         setVisiblity()
         checkDate()
     }
@@ -81,7 +82,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
+        when (item.itemId) {
             R.id.settingsBut -> {
 
                 openSettings()
@@ -94,7 +95,7 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
-    private fun openHelp(){
+    private fun openHelp() {
         val binding = InfoDialogBinding.inflate(layoutInflater)
 
         val dialog = UIHelper.getSimpleDialog(this, binding.root)
@@ -106,81 +107,96 @@ class MainActivity : AppCompatActivity() {
         dialog.show()
     }
 
-    private fun OnResultListener(result: FieldResult){
-        binding.refBtres.text = "%.1f".format(result.Btot).replace(',','.')
-        binding.DeclRes.text = "%.2f".format(result.Dec).replace(',','.')
-        binding.INCLres.text = "%.2f".format(result.Inc).replace(',','.')
-        binding.bHorRes.text = "%.1f".format(result.Bhor).replace(',','.')
-        binding.nCompRes.text = "%.1f".format(result.North).replace(',','.')
-        binding.eCompRes.text = "%.1f".format(result.East).replace(',','.')
-        binding.vCompRes.text = "%.1f".format(result.Vert).replace(',','.')
+    private fun OnResultListener(result: FieldResult) {
+        binding.refBtres.text = "%.1f".format(result.Btot).replace(',', '.')
+        binding.DeclRes.text = "%.2f".format(result.Dec).replace(',', '.')
+        binding.INCLres.text = "%.2f".format(result.Inc).replace(',', '.')
+        binding.bHorRes.text = "%.1f".format(result.Bhor).replace(',', '.')
+        binding.nCompRes.text = "%.1f".format(result.North).replace(',', '.')
+        binding.eCompRes.text = "%.1f".format(result.East).replace(',', '.')
+        binding.vCompRes.text = "%.1f".format(result.Vert).replace(',', '.')
 
         binding.progressLayout.visibility = View.GONE
     }
 
-    private fun OnErrorOccurred(message: String){
+    private fun OnErrorOccurred(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show()
         binding.progressLayout.visibility = View.GONE
     }
 
-    private fun calcModel(){
-        if(isEmpty(binding.latitudeEdit)) return
-        if(isEmpty(binding.longitudeEdit)) return
-        if(isEmpty(binding.altitudeEdit)) return
-        if(modeler != null){
+    private fun calcModel() {
+        if (isEmpty(binding.latitudeEdit)) return
+        if (isEmpty(binding.longitudeEdit)) return
+        if (isEmpty(binding.altitudeEdit)) return
+        if (modeler != null) {
             modeler!!.removeErrorListener(::OnErrorOccurred)
             modeler!!.removeResultListener(::OnResultListener)
         }
-            modeler = ModelMediator(sPref)
-            modeler!!.setResultListener(::OnResultListener)
-            modeler!!.setErrorListener(::OnErrorOccurred)
-            Log.d("NEWMODEL", "created model")
+        modeler = ModelMediator(sPref)
+        modeler!!.setResultListener(::OnResultListener)
+        modeler!!.setErrorListener(::OnErrorOccurred)
+        Log.d("NEWMODEL", "created model")
 
         try {
             binding.progressLayout.visibility = View.VISIBLE
             //GlobalScope.launch(Dispatchers.Main) {
-                modeler!!.doWork(binding.latitudeEdit.text.toString().toDouble(),
-                    binding.longitudeEdit.text.toString().toDouble(),
-                    binding.altitudeEdit.text.toString().toDouble(),
-                    binding.dateEdit.text.toString())
+            modeler!!.doWork(
+                binding.latitudeEdit.text.toString().toLatitude().toDouble(),
+                binding.longitudeEdit.text.toString().toLongitude().toDouble(),
+                binding.altitudeEdit.text.toString().toDouble(),
+                binding.dateEdit.text.toString()
+            )
 
             //}
 
-        }
-        catch (e: FormatException){
+        } catch (e: FormatException) {
             e.printStackTrace()
             Toast.makeText(this, getString(R.string.format_exception), Toast.LENGTH_LONG).show()
         }
     }
 
-    private fun isEmpty(view: EditText):Boolean{
-        if(view.text.isEmpty()){
+    private fun isEmpty(view: EditText): Boolean {
+        if (view.text.isEmpty()) {
             Toast.makeText(this, getString(R.string.field_is_empty), Toast.LENGTH_LONG).show()
             return true
         }
-            return false
+        return false
     }
 
-    private fun getCurrentLocation(){
-        if(mGpsUtils.checkLocationPermissions(this)){
-            if(mGpsUtils.checkLocationProvider(this)){
+    private fun getCurrentLocation() {
+        if (mGpsUtils.checkLocationPermissions(this)) {
+            if (mGpsUtils.checkLocationProvider(this)) {
                 mGpsUtils.startLocationUpdates(this)
                 GlobalScope.launch(Dispatchers.Main) {
                     binding.progressLayout.visibility = View.VISIBLE
                     val location = mGpsUtils.mLastLocation
                     var timeout = 10
-                    while ((timeout--)>0){
+                    while ((timeout--) > 0) {
                         delay(2000)
-                        if(mGpsUtils.mLastLocation != location){
+                        if (mGpsUtils.mLastLocation != location) {
                             binding.progressLayout.visibility = View.GONE
-                            binding.latitudeEdit.setText("%.4f".format(mGpsUtils.mLastLocation?.latitude?:0).replace(',','.'))
-                            binding.longitudeEdit.setText("%.4f".format(mGpsUtils.mLastLocation?.longitude?:0).replace(',','.'))
-                            binding.altitudeEdit.setText((mGpsUtils.mLastLocation?.altitude?:0).toString())
+                            binding.latitudeEdit.setText(
+                                "%.4f".format(
+                                    mGpsUtils.mLastLocation?.latitude ?: 0
+                                ).replace(',', '.')
+                            )
+                            binding.longitudeEdit.setText(
+                                "%.4f".format(
+                                    mGpsUtils.mLastLocation?.longitude ?: 0
+                                ).replace(',', '.')
+                            )
+                            binding.altitudeEdit.setText(
+                                (mGpsUtils.mLastLocation?.altitude ?: 0).toString()
+                            )
                             return@launch
                         }
 
                     }
-                    Toast.makeText(this@MainActivity, getString(R.string.bad_signal), Toast.LENGTH_LONG).show()
+                    Toast.makeText(
+                        this@MainActivity,
+                        getString(R.string.bad_signal),
+                        Toast.LENGTH_LONG
+                    ).show()
                     binding.progressLayout.visibility = View.GONE
                 }
             }
@@ -188,7 +204,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun copyResult(){
+    private fun copyResult() {
         val result = zipResult(ReportFormat.TXT)
         val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         val clip = ClipData.newPlainText("", result)
@@ -196,7 +212,7 @@ class MainActivity : AppCompatActivity() {
         Toast.makeText(this, getString(R.string.copy_message), Toast.LENGTH_LONG).show()
     }
 
-    private fun shareResult(){
+    private fun shareResult() {
         val result = zipResult(ReportFormat.TXT)
         val sendIntent = Intent()
         sendIntent.action = Intent.ACTION_SEND
@@ -205,48 +221,53 @@ class MainActivity : AppCompatActivity() {
         startActivity(Intent.createChooser(sendIntent, getString(R.string.send_to)))
     }
 
-    private fun zipResult(format: ReportFormat):String{
-        val reporter = ReportUtil(format, getString(R.string.date), binding.dateEdit.text.toString())
+    private fun zipResult(format: ReportFormat): String {
+        val reporter =
+            ReportUtil(format, getString(R.string.date), binding.dateEdit.text.toString())
         reporter.add(getString(R.string.latitude), binding.latitudeEdit.text.toString())
         reporter.add(getString(R.string.longitude), binding.longitudeEdit.text.toString())
         reporter.add(getString(R.string.altitude), binding.altitudeEdit.text.toString())
-        if(binding.btotLayout.isVisible)
+        if (binding.btotLayout.isVisible)
             reporter.add(getString(R.string.Btotal), binding.refBtres.text.toString())
-        if(binding.declLayout.isVisible)
+        if (binding.declLayout.isVisible)
             reporter.add(getString(R.string.Decl), binding.DeclRes.text.toString())
-        if(binding.inclLayout.isVisible)
+        if (binding.inclLayout.isVisible)
             reporter.add(getString(R.string.INCL), binding.INCLres.text.toString())
-        if(binding.bxyLayout.isVisible)
+        if (binding.bxyLayout.isVisible)
             reporter.add(getString(R.string.Bhor), binding.bHorRes.text.toString())
-        if(binding.ncompLayout.isVisible)
+        if (binding.ncompLayout.isVisible)
             reporter.add(getString(R.string.north_comp), binding.nCompRes.text.toString())
-        if(binding.ecompLayout.isVisible)
+        if (binding.ecompLayout.isVisible)
             reporter.add(getString(R.string.east_comp), binding.eCompRes.text.toString())
-        if(binding.vcompLayout.isVisible)
+        if (binding.vcompLayout.isVisible)
             reporter.add(getString(R.string.vert_comp), binding.vCompRes.text.toString())
 
         return reporter.report
     }
 
-    private fun openSettings(){
+    private fun openSettings() {
         val settingsIntent = Intent(this, SettingsActivity::class.java)
         startActivity(settingsIntent)
     }
 
-    private fun setDate(){
+    private fun setDate() {
         val dFormatter = DateFormatter(DateFormat.DMY)
         dFormatter.changeDate(this, DatePickerDialog.OnDateSetListener(::dateListener))
     }
 
 
-    private fun dateListener(dPD: DatePicker, year: Int, month: Int, day: Int){
+    private fun dateListener(dPD: DatePicker, year: Int, month: Int, day: Int) {
 
-            val result = DateFormatter(DateFormat.getFormat(sPref.getString("dateformat","dd/MM/yyyy")?:"yyyy/MM/dd"))
-                .getStringFromDate(UserDate(day, month+1, year))
+        val result = DateFormatter(
+            DateFormat.getFormat(
+                sPref.getString("dateformat", "dd/MM/yyyy") ?: "yyyy/MM/dd"
+            )
+        )
+            .getStringFromDate(UserDate(day, month + 1, year))
         binding.dateEdit.text = result
     }
 
-    private fun defaultFields(){
+    private fun defaultFields() {
         binding.latitudeEdit.setText("")
         binding.longitudeEdit.setText("")
         binding.altitudeEdit.setText("")
@@ -257,27 +278,36 @@ class MainActivity : AppCompatActivity() {
         binding.nCompRes.text = ""
         binding.eCompRes.text = ""
         binding.vCompRes.text = ""
-        dateFormat = DateFormat.getFormat(sPref.getString("dateformat","dd/MM/yyyy")?:"yyyy/MM/dd")
+        dateFormat =
+            DateFormat.getFormat(sPref.getString("dateformat", "dd/MM/yyyy") ?: "yyyy/MM/dd")
         binding.dateEdit.text = DateFormatter(dateFormat)
             .getCurrentDate()
     }
 
-    private fun checkDate(){
-        val newFormat = DateFormat.getFormat(sPref.getString("dateformat","dd/MM/yyyy")?:"yyyy/MM/dd")
-        if(dateFormat != newFormat){
+    private fun checkDate() {
+        val newFormat =
+            DateFormat.getFormat(sPref.getString("dateformat", "dd/MM/yyyy") ?: "yyyy/MM/dd")
+        if (dateFormat != newFormat) {
             val date = DateFormatter(dateFormat).getDateFromString(binding.dateEdit.text.toString())
             binding.dateEdit.text = DateFormatter(newFormat).getStringFromDate(date)
             dateFormat = newFormat
         }
     }
 
-    private fun setVisiblity(){
-        binding.btotLayout.visibility = if(sPref.getBoolean("btotal", true)) View.VISIBLE else View.GONE
-        binding.declLayout.visibility = if(sPref.getBoolean("declination", true)) View.VISIBLE else View.GONE
-        binding.inclLayout.visibility = if(sPref.getBoolean("inclination", true)) View.VISIBLE else View.GONE
-        binding.bxyLayout.visibility = if(sPref.getBoolean("bxy", false)) View.VISIBLE else View.GONE
-        binding.ncompLayout.visibility = if(sPref.getBoolean("northComp", false)) View.VISIBLE else View.GONE
-        binding.ecompLayout.visibility = if(sPref.getBoolean("eastComp", false)) View.VISIBLE else View.GONE
-        binding.vcompLayout.visibility = if(sPref.getBoolean("vertComp", false)) View.VISIBLE else View.GONE
+    private fun setVisiblity() {
+        binding.btotLayout.visibility =
+            if (sPref.getBoolean("btotal", true)) View.VISIBLE else View.GONE
+        binding.declLayout.visibility =
+            if (sPref.getBoolean("declination", true)) View.VISIBLE else View.GONE
+        binding.inclLayout.visibility =
+            if (sPref.getBoolean("inclination", true)) View.VISIBLE else View.GONE
+        binding.bxyLayout.visibility =
+            if (sPref.getBoolean("bxy", false)) View.VISIBLE else View.GONE
+        binding.ncompLayout.visibility =
+            if (sPref.getBoolean("northComp", false)) View.VISIBLE else View.GONE
+        binding.ecompLayout.visibility =
+            if (sPref.getBoolean("eastComp", false)) View.VISIBLE else View.GONE
+        binding.vcompLayout.visibility =
+            if (sPref.getBoolean("vertComp", false)) View.VISIBLE else View.GONE
     }
 }

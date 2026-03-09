@@ -8,6 +8,6 @@ enum class Model(val value: String) {
     IGRF("IGRF"), WMM("WMM")
 }
 
-enum class EarthShape(val value: String){
+enum class EarthShape(val value: String) {
     SPHERE("SPHERE"), ELLIPSOID("ELLIPSOID")
 }
