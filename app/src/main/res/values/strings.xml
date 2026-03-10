@@ -50,5 +50,9 @@
 
     <string name="send_to">Share results via:</string>
     <string name="copy_message">Copied to clipboard.</string>
+    <string name="southLatButton" translatable="false">S</string>
+    <string name="northLatButton" translatable="false">N</string>
+    <string name="westLongButton" translatable="false">W</string>
+    <string name="eastLongButton" translatable="false">E</string>
 
 </resources>

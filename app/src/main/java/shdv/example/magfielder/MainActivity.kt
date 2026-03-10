@@ -17,6 +17,7 @@ import android.widget.DatePicker
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.WindowCompat
 import androidx.core.view.isVisible
 import androidx.preference.PreferenceManager
 import kotlinx.coroutines.Dispatchers
@@ -34,8 +35,6 @@ import shdv.example.magfielder.utils.ReportFormat
 import shdv.example.magfielder.utils.ReportUtil
 import shdv.example.magfielder.utils.UIHelper
 import shdv.example.magfielder.utils.UserDate
-import shdv.example.magfielder.utils.toLatitude
-import shdv.example.magfielder.utils.toLongitude
 
 
 class MainActivity : AppCompatActivity() {
@@ -44,11 +43,15 @@ class MainActivity : AppCompatActivity() {
     private lateinit var sPref: SharedPreferences
     private lateinit var binding: ActivityMainBinding
     private var modeler: ModelMediator? = null
+    private var latSign = 1
+    private var longSign = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
+        WindowCompat.setDecorFitsSystemWindows(window, true)
         setContentView(binding.root)
+
         mGpsUtils = GpsUtils(getSystemService(LOCATION_SERVICE) as LocationManager)
         binding.setlocationBtn.setOnClickListener { getCurrentLocation() }
         binding.clrBtn.setOnClickListener { defaultFields() }
@@ -58,6 +61,8 @@ class MainActivity : AppCompatActivity() {
         sPref = PreferenceManager.getDefaultSharedPreferences(this)
         setVisiblity()
         binding.calcBtn.setOnClickListener { calcModel() }
+        binding.btnLat.setOnClickListener { actionLatBtn() }
+        binding.btnLong.setOnClickListener { actionLongBtn() }
         defaultFields()
     }
 
@@ -138,11 +143,21 @@ class MainActivity : AppCompatActivity() {
         Log.d("NEWMODEL", "created model")
 
         try {
+            latSign = when {
+                binding.btnLat.text == getString(R.string.northLatButton) -> 1
+                binding.btnLat.text == getString(R.string.southLatButton) -> -1
+                else -> 1
+            }
+            longSign = when {
+                binding.btnLong.text == getString(R.string.eastLongButton) -> 1
+                binding.btnLong.text == getString(R.string.westLongButton) -> -1
+                else -> 1
+            }
             binding.progressLayout.visibility = View.VISIBLE
             //GlobalScope.launch(Dispatchers.Main) {
             modeler!!.doWork(
-                binding.latitudeEdit.text.toString().toLatitude().toDouble(),
-                binding.longitudeEdit.text.toString().toLongitude().toDouble(),
+                binding.latitudeEdit.text.toString().toDouble() * latSign,
+                binding.longitudeEdit.text.toString().toDouble() * longSign,
                 binding.altitudeEdit.text.toString().toDouble(),
                 binding.dateEdit.text.toString()
             )
@@ -178,12 +193,28 @@ class MainActivity : AppCompatActivity() {
                             binding.latitudeEdit.setText(
                                 "%.4f".format(
                                     mGpsUtils.mLastLocation?.latitude ?: 0
-                                ).replace(',', '.')
+                                ).replace(',', '.').let {
+                                    if (it.startsWith("-")) {
+                                        binding.btnLat.text = getString(R.string.southLatButton)
+                                        it.removePrefix("-")
+                                    } else {
+                                        binding.btnLat.text = getString(R.string.northLatButton)
+                                        it
+                                    }
+                                }
                             )
                             binding.longitudeEdit.setText(
                                 "%.4f".format(
                                     mGpsUtils.mLastLocation?.longitude ?: 0
-                                ).replace(',', '.')
+                                ).replace(',', '.').let {
+                                    if (it.startsWith("-")) {
+                                        binding.btnLong.text = getString(R.string.westLongButton)
+                                        it.removePrefix("-")
+                                    } else {
+                                        binding.btnLong.text = getString(R.string.eastLongButton)
+                                        it
+                                    }
+                                }
                             )
                             binding.altitudeEdit.setText(
                                 (mGpsUtils.mLastLocation?.altitude ?: 0).toString()
@@ -309,5 +340,23 @@ class MainActivity : AppCompatActivity() {
             if (sPref.getBoolean("eastComp", false)) View.VISIBLE else View.GONE
         binding.vcompLayout.visibility =
             if (sPref.getBoolean("vertComp", false)) View.VISIBLE else View.GONE
+    }
+
+    private fun actionLatBtn() {
+        val value = when {
+            binding.btnLat.text == getString(R.string.northLatButton) -> getString(R.string.southLatButton)
+            binding.btnLat.text == getString(R.string.southLatButton) -> getString(R.string.northLatButton)
+            else -> getString(R.string.northLatButton)
+        }
+        binding.btnLat.text = value
+    }
+
+    private fun actionLongBtn() {
+        val value = when {
+            binding.btnLong.text == getString(R.string.eastLongButton) -> getString(R.string.westLongButton)
+            binding.btnLong.text == getString(R.string.westLongButton) -> getString(R.string.eastLongButton)
+            else -> getString(R.string.eastLongButton)
+        }
+        binding.btnLong.text = value
     }
 }
