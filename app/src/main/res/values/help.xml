@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="help_body">
-\n<b>Latitude</b> - enter the North latitude signed \'+\', South latitude - signed \'-\' in a decimal format. For example, 60.25 - 60deg 15m North latitude.
-\n<b>Longitude</b> - enter the East longitude signed \'+\', West longitude - signed \'-\' in a decimal format. For example, -30.25 - 30deg 15m West longitude.
+\n<b>Latitude</b> - enter the North latitude signed \'+\' or \'N\', South latitude - signed \'-\' or \'S\' in a decimal format. For example, 60.25 - 60deg 15m North latitude.
+\n<b>Longitude</b> - enter the East longitude signed \'+\' or \'E\', West longitude - signed \'-\' or \'W\' in a decimal format. For example, -30.25 - 30deg 15m West longitude.
 \n<b>Altitude</b> - enter the mean sea level in a meters.
 \n<b>Earth shape</b> - select between sphere or ellipsoid (recommended) due to EGS-84 model.
 \n<b>Btotal</b> -  total Earth magnetic field intensity.

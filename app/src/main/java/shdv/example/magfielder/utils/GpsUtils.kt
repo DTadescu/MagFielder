@@ -1,4 +1,4 @@
-package shdv.example.magfielder.Utils
+package shdv.example.magfielder.utils
 
 import android.Manifest
 import android.app.Activity
@@ -12,15 +12,18 @@ import android.provider.Settings
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.app.ActivityCompat.startActivityForResult
-import com.google.android.gms.location.*
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationCallback
+import com.google.android.gms.location.LocationRequest
+import com.google.android.gms.location.LocationResult
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.LocationSettingsRequest
 import shdv.example.magfielder.R
-import androidx.fragment.app.FragmentActivity
-import androidx.core.content.ContextCompat
 
 class GpsUtils(_locationManager: LocationManager) {
     var mLastLocation: Location? = null
     private var mFusedLocationProviderClient: FusedLocationProviderClient? = null
-    private  val MY_PERMISSIONS_REQUEST_LOCATION = 99
+    private val MY_PERMISSIONS_REQUEST_LOCATION = 99
     private val INTERVAL: Long = 2000
     private val FASTEST_INTERVAL: Long = 1000
     private val locationManager = _locationManager
@@ -28,7 +31,7 @@ class GpsUtils(_locationManager: LocationManager) {
     private var isLocationChanged = false
     private var isLocationGoing = false
 
-    fun checkLocationPermissions(context: Context):Boolean{
+    fun checkLocationPermissions(context: Context): Boolean {
         if (ActivityCompat.checkSelfPermission(
                 context,
                 Manifest.permission.ACCESS_FINE_LOCATION
@@ -37,7 +40,8 @@ class GpsUtils(_locationManager: LocationManager) {
             ActivityCompat.requestPermissions(
                 context as Activity,
                 arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-                MY_PERMISSIONS_REQUEST_LOCATION)
+                MY_PERMISSIONS_REQUEST_LOCATION
+            )
             return false
         }
         return true
@@ -47,7 +51,7 @@ class GpsUtils(_locationManager: LocationManager) {
     fun startLocationUpdates(context: Context) {
 
         // Create the location request to start receiving updates
-        if(isLocationGoing) return
+        if (isLocationGoing) return
         mLocationRequest!!.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
         mLocationRequest!!.setInterval(INTERVAL)
         mLocationRequest!!.setFastestInterval(FASTEST_INTERVAL)
@@ -62,24 +66,32 @@ class GpsUtils(_locationManager: LocationManager) {
 
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(context)
         // new Google API SDK v11 uses getFusedLocationProviderClient(this)
-        if (ActivityCompat.checkSelfPermission(context,
-                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(
+                context,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                context,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
             return
         }
-        mFusedLocationProviderClient!!.requestLocationUpdates(mLocationRequest, mLocationCallback,
-            Looper.myLooper())
+        mFusedLocationProviderClient!!.requestLocationUpdates(
+            mLocationRequest, mLocationCallback,
+            Looper.myLooper()
+        )
         isLocationGoing = true
     }
 
     fun stoplocationUpdates() {
 
-        if(mFusedLocationProviderClient != null)
+        if (mFusedLocationProviderClient != null)
             mFusedLocationProviderClient!!.removeLocationUpdates(mLocationCallback)
         isLocationGoing = false
     }
 
-    fun checkLocationProvider(context: Context):Boolean{
-        if(!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+    fun checkLocationProvider(context: Context): Boolean {
+        if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
             buildAlertMessageNoGps(context)
             return false
         }
@@ -97,14 +109,19 @@ class GpsUtils(_locationManager: LocationManager) {
         val builder = AlertDialog.Builder(context)
         builder.setMessage(context.getString(R.string.gps_seems_turnoff))
             .setCancelable(false)
-            .setPositiveButton(context.getString(R.string.yes)){dialog, id ->
-                startActivityForResult(context as Activity, Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS), 11, null)
+            .setPositiveButton(context.getString(R.string.yes)) { dialog, id ->
+                startActivityForResult(
+                    context as Activity,
+                    Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS),
+                    11,
+                    null
+                )
             }
             .setNegativeButton(context.getString(R.string.no)) { dialog, id ->
                 dialog.cancel()
 
             }
-        val alert: AlertDialog  = builder.create()
+        val alert: AlertDialog = builder.create()
         alert.show()
     }
 

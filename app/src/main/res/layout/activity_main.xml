@@ -1,447 +1,497 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/backmain"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/LabelStyle"
-            android:text="@string/latitude"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="5dp"/>
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/latitudeEdit"
-            android:hint="@string/hint"
-            android:layout_gravity="left"
-            android:layout_marginRight="15dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="1dp"
-            style="@style/InputStyle"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/LabelStyle"
-            android:text="@string/longitude"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="1dp"/>
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/longitudeEdit"
-            android:hint="@string/hint"
-            android:layout_gravity="left"
-            android:layout_marginRight="15dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="1dp"
-            style="@style/InputStyle"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/LabelStyle"
-            android:text="@string/altitude"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="1dp"/>
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/altitudeEdit"
-            android:hint="@string/hint"
-            android:layout_gravity="left"
-            android:layout_marginRight="15dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="1dp"
-            style="@style/InputStyle"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/LabelStyle"
-            android:text="@string/date"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="1dp"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/dateEdit"
-            android:text=" "
-            android:layout_marginRight="15dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="1dp"
-            android:textColor="@color/backmain"
-            style="@style/InputStyle"/>
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="42dp"
-            android:id="@+id/setlocationBtn"
-            android:text="@string/usegps"
-            android:textSize="16dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginLeft="15dp"
-            android:background="@drawable/button_background"
-            android:layout_marginTop="15dp"
-            />
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="3dp">
-            <Button
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:id="@+id/calcBtn"
-                android:text="@string/calculate"
-                android:textSize="16sp"
-                android:layout_marginLeft="15dp"
-                android:background="@drawable/button_background"/>
-            <Button
-                android:layout_width="wrap_content"
+                style="@style/LabelStyle"
+                android:text="@string/latitude"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="5dp" />
+
+            <EditText
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:id="@+id/clrBtn"
-                android:text="@string/clear"
-                android:textSize="16sp"
+                android:id="@+id/latitudeEdit"
+                android:hint="@string/hint"
+                android:layout_gravity="left"
                 android:layout_marginRight="15dp"
-                android:background="@drawable/nobut_background"/>
-        </LinearLayout>
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="1dp"
+                style="@style/LatitudeStyle" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:background="#7b7b7b"
-            android:layout_marginRight="15dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="5dp"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            style="@style/LabelStyle"
-            android:text="@string/results"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="5dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/LabelStyle"
+                android:text="@string/longitude"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="1dp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:id="@+id/btot_layout">
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/longitudeEdit"
+                android:hint="@string/hint"
+                android:layout_gravity="left"
+                android:layout_marginRight="15dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="1dp"
+                style="@style/LongitudeStyle" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/LabelStyle"
+                android:text="@string/altitude"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="1dp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/altitudeEdit"
+                android:hint="@string/hint"
+                android:layout_gravity="left"
+                android:layout_marginRight="15dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="1dp"
+                style="@style/InputStyle" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/LabelStyle"
+                android:text="@string/date"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="1dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/dateEdit"
+                android:text=" "
+                android:layout_marginRight="15dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="1dp"
+                android:textColor="@color/backmain"
+                style="@style/InputStyle" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:id="@+id/setlocationBtn"
+                android:text="@string/usegps"
+                android:textSize="16dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginLeft="15dp"
+                android:background="@drawable/button_background"
+                android:layout_marginTop="15dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:id="@+id/calcBtn"
+                    android:text="@string/calculate"
+                    android:textSize="16sp"
+                    android:layout_marginLeft="15dp"
+                    android:background="@drawable/button_background" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:id="@+id/clrBtn"
+                    android:text="@string/clear"
+                    android:textSize="16sp"
+                    android:layout_marginRight="15dp"
+                    android:background="@drawable/nobut_background" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:background="#7b7b7b"
+                android:layout_marginRight="15dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="5dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                style="@style/LabelStyle"
+                android:text="@string/results"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/btot_layout">
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="#7b7b7b"
                     android:layout_marginRight="35dp"
                     android:layout_marginLeft="35dp" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
+
                     <FrameLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:layoutDirection="rtl">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             style="@style/LabelStyle"
                             android:text="@string/Btotal"
-                            android:layout_marginLeft="5dp"/>
+                            android:layout_marginLeft="5dp" />
                     </FrameLayout>
+
                     <FrameLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1">
+
                         <TextView
                             android:id="@+id/refBtres"
                             style="@style/ResultField" />
                     </FrameLayout>
+                </LinearLayout>
+
             </LinearLayout>
 
-        </LinearLayout>
 
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:id="@+id/decl_layout">
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#7b7b7b"
-                android:layout_marginRight="35dp"
-                android:layout_marginLeft="35dp" />
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layoutDirection="rtl">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        style="@style/LabelStyle"
-                        android:text="@string/Decl"
-                        android:layout_marginLeft="5dp"/>
-                </FrameLayout>
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
-                    <TextView
-                        style="@style/ResultField"
-                        android:id="@+id/DeclRes"
-                        />
-                </FrameLayout>
-            </LinearLayout>
-
-        </LinearLayout>
-
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:id="@+id/incl_layout">
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#7b7b7b"
-                android:layout_marginRight="35dp"
-                android:layout_marginLeft="35dp" />
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layoutDirection="rtl">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        style="@style/LabelStyle"
-                        android:text="@string/INCL"
-                        android:layout_marginLeft="5dp"/>
-                </FrameLayout>
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
-                    <TextView
-                        android:id="@+id/INCLres"
-                        style="@style/ResultField"/>
-                </FrameLayout>
-            </LinearLayout>
-
-        </LinearLayout>
-
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:id="@+id/bxy_layout">
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#7b7b7b"
-                android:layout_marginRight="35dp"
-                android:layout_marginLeft="35dp" />
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layoutDirection="rtl">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        style="@style/LabelStyle"
-                        android:text="@string/Bhor"
-                        android:layout_marginLeft="5dp"/>
-                </FrameLayout>
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
-                    <TextView
-                        android:id="@+id/bHorRes"
-                        style="@style/ResultField" />
-                </FrameLayout>
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:id="@+id/ncomp_layout">
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#7b7b7b"
-                android:layout_marginRight="35dp"
-                android:layout_marginLeft="35dp" />
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layoutDirection="rtl">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        style="@style/LabelStyle"
-                        android:text="@string/north_comp"
-                        android:layout_marginLeft="5dp"/>
-                </FrameLayout>
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
-                    <TextView
-                        android:id="@+id/nCompRes"
-                        style="@style/ResultField" />
-                </FrameLayout>
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:id="@+id/ecomp_layout">
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#7b7b7b"
-                android:layout_marginRight="35dp"
-                android:layout_marginLeft="35dp" />
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layoutDirection="rtl">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        style="@style/LabelStyle"
-                        android:text="@string/east_comp"
-                        android:layout_marginLeft="5dp"/>
-                </FrameLayout>
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
-                    <TextView
-                        android:id="@+id/eCompRes"
-                        style="@style/ResultField" />
-                </FrameLayout>
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:id="@+id/vcomp_layout">
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#7b7b7b"
-                android:layout_marginRight="35dp"
-                android:layout_marginLeft="35dp" />
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layoutDirection="rtl">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        style="@style/LabelStyle"
-                        android:text="@string/vert_comp"
-                        android:layout_marginLeft="5dp"/>
-                </FrameLayout>
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
-                    <TextView
-                        android:id="@+id/vCompRes"
-                        style="@style/ResultField" />
-                </FrameLayout>
-            </LinearLayout>
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:padding="5dp">
+                android:orientation="vertical"
+                android:id="@+id/decl_layout">
 
-                <ImageButton
-                    android:id="@+id/btnCopy"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_gravity="right"
-                    android:src="?attr/actionModeCopyDrawable"
-                    android:background="@drawable/nobut_background"/>
-            </FrameLayout>
-            <FrameLayout
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#7b7b7b"
+                    android:layout_marginRight="35dp"
+                    android:layout_marginLeft="35dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layoutDirection="rtl">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            style="@style/LabelStyle"
+                            android:text="@string/Decl"
+                            android:layout_marginLeft="5dp" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <TextView
+                            style="@style/ResultField"
+                            android:id="@+id/DeclRes" />
+                    </FrameLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:padding="5dp">
+                android:orientation="vertical"
+                android:id="@+id/incl_layout">
 
-                <ImageButton
-                    android:id="@+id/btnShare"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_gravity="left"
-                    android:src="@android:drawable/ic_menu_share"
-                    android:background="@drawable/nobut_background"/>
-            </FrameLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#7b7b7b"
+                    android:layout_marginRight="35dp"
+                    android:layout_marginLeft="35dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layoutDirection="rtl">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            style="@style/LabelStyle"
+                            android:text="@string/INCL"
+                            android:layout_marginLeft="5dp" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:id="@+id/INCLres"
+                            style="@style/ResultField" />
+                    </FrameLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/bxy_layout">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#7b7b7b"
+                    android:layout_marginRight="35dp"
+                    android:layout_marginLeft="35dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layoutDirection="rtl">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            style="@style/LabelStyle"
+                            android:text="@string/Bhor"
+                            android:layout_marginLeft="5dp" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:id="@+id/bHorRes"
+                            style="@style/ResultField" />
+                    </FrameLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/ncomp_layout">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#7b7b7b"
+                    android:layout_marginRight="35dp"
+                    android:layout_marginLeft="35dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layoutDirection="rtl">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            style="@style/LabelStyle"
+                            android:text="@string/north_comp"
+                            android:layout_marginLeft="5dp" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:id="@+id/nCompRes"
+                            style="@style/ResultField" />
+                    </FrameLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/ecomp_layout">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#7b7b7b"
+                    android:layout_marginRight="35dp"
+                    android:layout_marginLeft="35dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layoutDirection="rtl">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            style="@style/LabelStyle"
+                            android:text="@string/east_comp"
+                            android:layout_marginLeft="5dp" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:id="@+id/eCompRes"
+                            style="@style/ResultField" />
+                    </FrameLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/vcomp_layout">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#7b7b7b"
+                    android:layout_marginRight="35dp"
+                    android:layout_marginLeft="35dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layoutDirection="rtl">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            style="@style/LabelStyle"
+                            android:text="@string/vert_comp"
+                            android:layout_marginLeft="5dp" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:id="@+id/vCompRes"
+                            style="@style/ResultField" />
+                    </FrameLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="5dp">
+
+                    <ImageButton
+                        android:id="@+id/btnCopy"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_gravity="right"
+                        android:src="?attr/actionModeCopyDrawable"
+                        android:background="@drawable/nobut_background" />
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="5dp">
+
+                    <ImageButton
+                        android:id="@+id/btnShare"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_gravity="left"
+                        android:src="@android:drawable/ic_menu_share"
+                        android:background="@drawable/nobut_background" />
+                </FrameLayout>
+            </LinearLayout>
+
         </LinearLayout>
-
-    </LinearLayout>
     </ScrollView>
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -456,7 +506,7 @@
             android:id="@+id/progressBar"
             android:progress="100"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="40dp"/>
+            android:layout_marginTop="40dp" />
     </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
