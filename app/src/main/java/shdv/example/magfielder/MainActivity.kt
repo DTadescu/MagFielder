@@ -35,6 +35,9 @@ import shdv.example.magfielder.utils.ReportFormat
 import shdv.example.magfielder.utils.ReportUtil
 import shdv.example.magfielder.utils.UIHelper
 import shdv.example.magfielder.utils.UserDate
+import java.text.DecimalFormat
+import java.text.DecimalFormatSymbols
+import java.util.Locale
 
 
 class MainActivity : AppCompatActivity() {
@@ -45,6 +48,10 @@ class MainActivity : AppCompatActivity() {
     private var modeler: ModelMediator? = null
     private var latSign = 1
     private var longSign = 1
+    private val latPrefix get() = if (latSign > 0) "N" else "S"
+    private val longPrefix get() = if (longSign > 0) "E" else "W"
+    private val dfCord = DecimalFormat("#.####", DecimalFormatSymbols(Locale.US))
+    private val dfRes = DecimalFormat("#.0#", DecimalFormatSymbols(Locale.US))
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -113,13 +120,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun OnResultListener(result: FieldResult) {
-        binding.refBtres.text = "%.1f".format(result.Btot).replace(',', '.')
-        binding.DeclRes.text = "%.2f".format(result.Dec).replace(',', '.')
-        binding.INCLres.text = "%.2f".format(result.Inc).replace(',', '.')
-        binding.bHorRes.text = "%.1f".format(result.Bhor).replace(',', '.')
-        binding.nCompRes.text = "%.1f".format(result.North).replace(',', '.')
-        binding.eCompRes.text = "%.1f".format(result.East).replace(',', '.')
-        binding.vCompRes.text = "%.1f".format(result.Vert).replace(',', '.')
+        binding.refBtres.text = dfRes.format(result.Btot).replace(',', '.')
+        binding.DeclRes.text = dfRes.format(result.Dec).replace(',', '.')
+        binding.INCLres.text = dfRes.format(result.Inc).replace(',', '.')
+        binding.bHorRes.text = dfRes.format(result.Bhor).replace(',', '.')
+        binding.nCompRes.text = dfRes.format(result.North).replace(',', '.')
+        binding.eCompRes.text = dfRes.format(result.East).replace(',', '.')
+        binding.vCompRes.text = dfRes.format(result.Vert).replace(',', '.')
 
         binding.progressLayout.visibility = View.GONE
     }
@@ -191,7 +198,7 @@ class MainActivity : AppCompatActivity() {
                         if (mGpsUtils.mLastLocation != location) {
                             binding.progressLayout.visibility = View.GONE
                             binding.latitudeEdit.setText(
-                                "%.4f".format(
+                                dfCord.format(
                                     mGpsUtils.mLastLocation?.latitude ?: 0
                                 ).replace(',', '.').let {
                                     if (it.startsWith("-")) {
@@ -204,7 +211,7 @@ class MainActivity : AppCompatActivity() {
                                 }
                             )
                             binding.longitudeEdit.setText(
-                                "%.4f".format(
+                                dfCord.format(
                                     mGpsUtils.mLastLocation?.longitude ?: 0
                                 ).replace(',', '.').let {
                                     if (it.startsWith("-")) {
@@ -217,7 +224,9 @@ class MainActivity : AppCompatActivity() {
                                 }
                             )
                             binding.altitudeEdit.setText(
-                                (mGpsUtils.mLastLocation?.altitude ?: 0).toString()
+                                dfCord.format(
+                                    mGpsUtils.mLastLocation?.altitude ?: 0
+                                )
                             )
                             return@launch
                         }
@@ -255,8 +264,8 @@ class MainActivity : AppCompatActivity() {
     private fun zipResult(format: ReportFormat): String {
         val reporter =
             ReportUtil(format, getString(R.string.date), binding.dateEdit.text.toString())
-        reporter.add(getString(R.string.latitude), binding.latitudeEdit.text.toString())
-        reporter.add(getString(R.string.longitude), binding.longitudeEdit.text.toString())
+        reporter.add(getString(R.string.latitude), latPrefix + binding.latitudeEdit.text.toString())
+        reporter.add(getString(R.string.longitude), longPrefix + binding.longitudeEdit.text.toString())
         reporter.add(getString(R.string.altitude), binding.altitudeEdit.text.toString())
         if (binding.btotLayout.isVisible)
             reporter.add(getString(R.string.Btotal), binding.refBtres.text.toString())

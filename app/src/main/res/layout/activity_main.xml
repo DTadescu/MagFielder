@@ -29,7 +29,7 @@
                 style="@style/LabelStyle"
                 android:text="@string/latitude"
                 android:layout_marginTop="5dp"
-                android:layout_marginStart="5dp" />
+                android:layout_marginStart="15dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -46,7 +46,7 @@
                 android:hint="@string/hint"
                 android:layout_gravity="start"
                 android:layout_marginEnd="5dp"
-                android:layout_marginStart="5dp"
+                android:layout_marginStart="15dp"
                 android:layout_marginTop="1dp"
                 style="@style/LatitudeStyle" />
 
@@ -67,7 +67,7 @@
                 android:layout_height="wrap_content"
                 style="@style/LabelStyle"
                 android:text="@string/longitude"
-                android:layout_marginStart="5dp"
+                android:layout_marginStart="15dp"
                 android:layout_marginTop="1dp" />
 
         <LinearLayout
@@ -85,7 +85,7 @@
                 android:hint="@string/hint"
                 android:layout_gravity="start"
                 android:layout_marginEnd="5dp"
-                android:layout_marginStart="5dp"
+                android:layout_marginStart="15dp"
                 android:layout_marginTop="1dp"
                 style="@style/LongitudeStyle" />
 
@@ -106,7 +106,7 @@
                 android:layout_height="wrap_content"
                 style="@style/LabelStyle"
                 android:text="@string/altitude"
-                android:layout_marginLeft="5dp"
+                android:layout_marginStart="15dp"
                 android:layout_marginTop="1dp" />
 
             <EditText
@@ -114,9 +114,9 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/altitudeEdit"
                 android:hint="@string/hint"
-                android:layout_gravity="left"
-                android:layout_marginRight="15dp"
-                android:layout_marginLeft="5dp"
+                android:layout_gravity="start"
+                android:layout_marginEnd="15dp"
+                android:layout_marginStart="15dp"
                 android:layout_marginTop="1dp"
                 style="@style/InputStyle" />
 
@@ -125,7 +125,7 @@
                 android:layout_height="wrap_content"
                 style="@style/LabelStyle"
                 android:text="@string/date"
-                android:layout_marginLeft="5dp"
+                android:layout_marginStart="15dp"
                 android:layout_marginTop="1dp" />
 
             <TextView
@@ -134,7 +134,7 @@
                 android:id="@+id/dateEdit"
                 android:text=" "
                 android:layout_marginRight="15dp"
-                android:layout_marginLeft="5dp"
+                android:layout_marginLeft="15dp"
                 android:layout_marginTop="1dp"
                 android:textColor="@color/backmain"
                 style="@style/InputStyle" />
@@ -172,7 +172,7 @@
                     android:id="@+id/clrBtn"
                     android:text="@string/clear"
                     android:textSize="16sp"
-                    android:layout_marginRight="15dp"
+                    android:layout_marginEnd="15dp"
                     android:background="@drawable/nobut_background" />
             </LinearLayout>
 
@@ -190,7 +190,7 @@
                 android:layout_gravity="center_horizontal"
                 style="@style/LabelStyle"
                 android:text="@string/results"
-                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5dp"
                 android:layout_marginTop="5dp" />
 
             <LinearLayout
@@ -208,7 +208,8 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:baselineAligned="false">
 
                     <FrameLayout
                         android:layout_width="match_parent"
@@ -221,7 +222,7 @@
                             android:layout_height="wrap_content"
                             style="@style/LabelStyle"
                             android:text="@string/Btotal"
-                            android:layout_marginLeft="5dp" />
+                            android:layout_marginStart="5dp" />
                     </FrameLayout>
 
                     <FrameLayout
@@ -253,7 +254,8 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:baselineAligned="false">
 
                     <FrameLayout
                         android:layout_width="match_parent"
@@ -266,7 +268,7 @@
                             android:layout_height="wrap_content"
                             style="@style/LabelStyle"
                             android:text="@string/Decl"
-                            android:layout_marginLeft="5dp" />
+                            android:layout_marginStart="5dp" />
                     </FrameLayout>
 
                     <FrameLayout
@@ -298,7 +300,8 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:baselineAligned="false">
 
                     <FrameLayout
                         android:layout_width="match_parent"
@@ -311,7 +314,7 @@
                             android:layout_height="wrap_content"
                             style="@style/LabelStyle"
                             android:text="@string/INCL"
-                            android:layout_marginLeft="5dp" />
+                            android:layout_marginStart="5dp" />
                     </FrameLayout>
 
                     <FrameLayout
@@ -343,7 +346,8 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:baselineAligned="false">
 
                     <FrameLayout
                         android:layout_width="match_parent"
@@ -356,7 +360,7 @@
                             android:layout_height="wrap_content"
                             style="@style/LabelStyle"
                             android:text="@string/Bhor"
-                            android:layout_marginLeft="5dp" />
+                            android:layout_marginStart="5dp" />
                     </FrameLayout>
 
                     <FrameLayout
@@ -386,7 +390,8 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:baselineAligned="false">
 
                     <FrameLayout
                         android:layout_width="match_parent"
@@ -399,7 +404,7 @@
                             android:layout_height="wrap_content"
                             style="@style/LabelStyle"
                             android:text="@string/north_comp"
-                            android:layout_marginLeft="5dp" />
+                            android:layout_marginStart="5dp" />
                     </FrameLayout>
 
                     <FrameLayout
@@ -429,7 +434,8 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:baselineAligned="false">
 
                     <FrameLayout
                         android:layout_width="match_parent"
@@ -442,7 +448,7 @@
                             android:layout_height="wrap_content"
                             style="@style/LabelStyle"
                             android:text="@string/east_comp"
-                            android:layout_marginLeft="5dp" />
+                            android:layout_marginStart="5dp" />
                     </FrameLayout>
 
                     <FrameLayout
@@ -472,7 +478,8 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:baselineAligned="false">
 
                     <FrameLayout
                         android:layout_width="match_parent"
@@ -485,7 +492,7 @@
                             android:layout_height="wrap_content"
                             style="@style/LabelStyle"
                             android:text="@string/vert_comp"
-                            android:layout_marginLeft="5dp" />
+                            android:layout_marginStart="5dp" />
                     </FrameLayout>
 
                     <FrameLayout
@@ -503,7 +510,8 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:baselineAligned="false">
 
                 <FrameLayout
                     android:layout_width="match_parent"
@@ -515,7 +523,7 @@
                         android:id="@+id/btnCopy"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
-                        android:layout_gravity="right"
+                        android:layout_gravity="end"
                         android:src="?attr/actionModeCopyDrawable"
                         android:background="@drawable/nobut_background" />
                 </FrameLayout>
@@ -530,7 +538,7 @@
                         android:id="@+id/btnShare"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
-                        android:layout_gravity="left"
+                        android:layout_gravity="start"
                         android:src="@android:drawable/ic_menu_share"
                         android:background="@drawable/nobut_background" />
                 </FrameLayout>
