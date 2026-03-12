@@ -31,15 +31,13 @@
     <style name="LatitudeStyle">
         <item name="android:textSize">18sp</item>
         <item name="android:background">@drawable/input_field</item>
-        <item name="android:inputType">text</item>
-        <item name="android:digits">0123456789.-+NSns</item>
+        <item name="android:inputType">numberDecimal</item>
     </style>
 
     <style name="LongitudeStyle">
         <item name="android:textSize">18sp</item>
         <item name="android:background">@drawable/input_field</item>
-        <item name="android:inputType">text</item>
-        <item name="android:digits">0123456789.-+EWew</item>
+        <item name="android:inputType">numberDecimal</item>
     </style>
 
     <style name="ResultField">
